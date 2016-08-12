@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1470813453 source:/home/carlos/documentos/ProyectoMIA200715324/lineaComandos.c
+
+1470813465 source:/home/carlos/documentos/ProyectoMIA200715324/main.c
+	<stdio.h>
+	<stdlib.h>
+
