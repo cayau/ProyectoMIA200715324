@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include "lineaComandos.h"
 
 char pathTMP[100];
 

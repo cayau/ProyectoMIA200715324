@@ -1,5 +1,5 @@
-#ifndef LINEACOMANDOS_H_INCLUDED
-#define LINEACOMANDOS_H_INCLUDED
+#ifndef LINEACOMANDOS_H
+#define LINEACOMANDOS_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,7 +33,7 @@ struct MBR{
 
 void menuPrincipal();
 void crearDiscos(char* comando);
-void crearDiscosDatos(char *size, char *unidad, char *direccion);
+void crearDiscosDatos(char *size, char *unidad, char *direccion, char *nombre);
 void eliminarDiscos(char *comando);
 
 void crearParticiones(char *comando);
@@ -43,4 +43,4 @@ void crearParticionesDISCO(int tamano, char *direccion, char *tipo, char *ajuste
 void crearParticionesEliminar(char *delet, char *nombre, char *direccion);
 void crearParticionesAgregar(char *add, char *nombre, char *direccion, char *unidad);
 
-#endif // LINEACOMANDOS_H_INCLUDED
+#endif // LINEACOMANDOS_H

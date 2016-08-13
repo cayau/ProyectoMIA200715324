@@ -30,7 +30,7 @@ void formateoParticion(char *comando)
             strcpy(path,token);
             pathObligatorio=1;
 
-        }else if(strcmp(token,"-type")==0 && token!=NULL) //opcional
+        }else if(strcmp(token,"+type")==0 && token!=NULL) //opcional
         {
             token=strtok(NULL," ");
             strcpy(type,token);
@@ -42,20 +42,19 @@ void formateoParticion(char *comando)
             strcpy(name,token);
             nombreObligatorio=1;
 
-        }else if(strcmp(token, "-add")==0 && token!=NULL) //opcional
+        }else if(strcmp(token, "+add")==0 && token!=NULL) //opcional
         {
             token=strtok(NULL, " ");
             strcpy(add, token);
             agregarOpcional=1;
 
-        }else if(strcmp(token, "-unit")==0 && token!=NULL) //opcional
+        }else if(strcmp(token, "+unit")==0 && token!=NULL) //opcional
         {
             token=strtok(NULL, " ");
             strcpy(unit, token);
             unidadOpcional=1;
         }
-
-        token=strtok(NULL,"=");
+        token=strtok(NULL,":");
     }
 
 
@@ -469,7 +468,7 @@ void agregarIndicesTemporales(char *comando)
             nombreObligatorio=1;
 
         }
-        token=strtok(NULL,"=");
+        token=strtok(NULL,":");
     }
     //comprobar sí el path anterior es igual al que viene
     if(strcmp(path,pathTMP)==0) //si son iguales no cambiar de letra pero sí de numero

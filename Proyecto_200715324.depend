@@ -1,7 +1,24 @@
 # depslib dependency file v1.0
-1470813453 source:/home/carlos/documentos/ProyectoMIA200715324/lineaComandos.c
+1471066760 source:/home/carlos/documentos/ProyectoMIA200715324/lineaComandos.c
+	"lineaComandos.h"
+	"ext2.h"
 
-1470813465 source:/home/carlos/documentos/ProyectoMIA200715324/main.c
+1471024387 source:/home/carlos/documentos/ProyectoMIA200715324/main.c
+	<stdio.h>
+	"lineaComandos.h"
+
+1471066959 source:/home/carlos/documentos/ProyectoMIA200715324/ext2.c
+	"ext2.h"
+
+1471024566 /home/carlos/documentos/ProyectoMIA200715324/ext2.h
+	"lineaComandos.h"
+
+1471028325 /home/carlos/documentos/ProyectoMIA200715324/lineaComandos.h
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<time.h>
+	<ctype.h>
 

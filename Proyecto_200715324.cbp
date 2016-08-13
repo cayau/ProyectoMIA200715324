@@ -31,9 +31,14 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="ext2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="ext2.h" />
 		<Unit filename="lineaComandos.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="lineaComandos.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -1,5 +1,5 @@
-#ifndef EXT2_H_INCLUDED
-#define EXT2_H_INCLUDED
+#ifndef EXT2_H
+#define EXT2_H
 
 #include "lineaComandos.h"
 
@@ -84,4 +84,5 @@ void agregarIndicesTemporales(char *comando);
 int cont;
 
 
-#endif // EXT2_H_INCLUDED
+
+#endif // EXT2_H

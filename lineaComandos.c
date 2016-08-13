@@ -51,35 +51,9 @@ void menuPrincipal()
     }
     if((entroMontar==1 || entroDesmontar==1) && soloDisco==0)
     {
-
-        if(strcmp(token,"mkfile")==0) //crea archivos
-        {
-
-        }else if(strcmp(token,"cat")==0)
-        {
-
-        }else if(strcmp(token,"rmfile")==0)
-        {
-
-        }else if(strcmp(token,"edit")==0)
-        {
-
-        }else if(strcmp(token,"rename")==0)
-        {
-
-        }else if(strcmp(token, "mkdir")==0) //crea carpetas
+        if(strcmp(token, "mkdir")==0) //crea carpetas
         {
             sistemaEXT2crearCarpetas(comandoTMP);
-
-        }else if(strcmp(token,"cp")==0) //copiar todo su contenido archivo o carpeta a otro destino
-        {
-
-        }else if(strcmp(token,"mv")==0)
-        {
-
-        }else if(strcmp(token,"find")==0)
-        {
-
         }
     }
     menuPrincipal();
@@ -134,13 +108,16 @@ void crearDiscos(char* comando)
     char size[50];
     char unidad[50];
     char direccion[50];
+    char nombre[50];
     int obligatorioSize=0;
     int obligatorioPath=0;
+    int obligatorioName=0;
     int z;
 
     strcpy(size," ");
     strcpy(unidad," ");
     strcpy(direccion," ");
+    strcpy(nombre," ");
 
 
     for(z=0;comando[z];z++)
@@ -159,31 +136,38 @@ void crearDiscos(char* comando)
         }
         else if(strcmp(token,"+unit")==0 && token!=NULL)
         {
-            token=strtok(NULL, " ");
+            token=strtok(NULL," ");
             strcpy(unidad,token);
         }
         else if(strcmp(token,"-path")==0 && token!=NULL)
         {
-            token=strtok(NULL, " ");
+            token=strtok(NULL," ");
             strcpy(direccion,token);
             obligatorioPath=1;
         }
-        token=strtok(NULL,"::");
+        else if(strcmp(token,"-name")==0 && token!=NULL)
+        {
+            token=strtok(NULL," ");
+            strcpy(nombre,token);
+            obligatorioName=1;
+        }
+        token=strtok(NULL,":");
     }
 
-    if(obligatorioSize==1 && obligatorioPath==1 )
+    if(obligatorioSize==1 && obligatorioPath==1 && obligatorioName==1 )
     {
-        crearDiscosDatos(size, unidad, direccion);
+        crearDiscosDatos(size, unidad, direccion, nombre);
     }else
     {
-        printf("Es obligatorio que venga el tamaño y el path.\n");
+        printf("Es obligatorio que venga el tamaño, el path y el nombre.\n");
         printf("Es opcional la unidad que desea agregar.\n");
         printf("NO se puede crear por estos párametros, intentélo de nuevo.\n");
     }
 }
 
-void crearDiscosDatos(char *size, char *unidad, char *direccion)
+void crearDiscosDatos(char *size, char *unidad, char *direccion, char *nombre)
 {
+    printf("Size %s, Unit %s, Path %s, Nombre %s\n",size,unidad,direccion,nombre);
     //verificar sí la carpeta existe si no crearla.
     char direccionTMP1[100];
     char direccionTMP2[100];
@@ -337,7 +321,7 @@ void crearParticiones(char *comando)
             obligatorioSize=1;
             contVerificadorS++;
         }
-        else if(strcmp(token,"-unit")==0 && token!=NULL) //opcional
+        else if(strcmp(token,"+unit")==0 && token!=NULL) //opcional
         {
             token=strtok(NULL, " ");
             strcpy(unidad,token);
@@ -351,21 +335,21 @@ void crearParticiones(char *comando)
             obligatorioPath=1;
             contVerificadorP++;
         }
-        else if(strcmp(token,"-type")==0 && token!=NULL) //opcional
+        else if(strcmp(token,"+type")==0 && token!=NULL) //opcional
         {
             token=strtok(NULL, " ");
             strcpy(tipo,token);
             opcionalTipo=1;
             contVerificadorT++;
         }
-        else if(strcmp(token,"-fit")==0 && token!=NULL) //opcional
+        else if(strcmp(token,"+fit")==0 && token!=NULL) //opcional
         {
             token=strtok(NULL, " ");
             strcpy(ajuste,token);
             opcionalAjuste=1;
             contVerificadorF++;
         }
-        else if(strcmp(token,"-delete")==0 && token!=NULL) //opcional
+        else if(strcmp(token,"+delete")==0 && token!=NULL) //opcional
         {
             token=strtok(NULL, " ");
             strcpy(eliminar,token);
@@ -379,14 +363,14 @@ void crearParticiones(char *comando)
             obligatorioNombre=1;
             contVerificadorN++;
         }
-        else if(strcmp(token, "-add")==0 && token!=NULL) //opcional
+        else if(strcmp(token, "+add")==0 && token!=NULL) //opcional
         {
             token=strtok(NULL, " ");
             strcpy(add,token);
             opcionalAgregar=1;
             contVerificadorA++;
         }
-        token=strtok(NULL,"=");
+        token=strtok(NULL,":");
     }
     if(contVerificadorA<=1 || contVerificadorD <=1 || contVerificadorF <=1 || contVerificadorN<=1 || contVerificadorP<=1
             || contVerificadorS<=1 || contVerificadorT<=1 || contVerificadorU<=1)
@@ -429,7 +413,9 @@ void crearParticiones(char *comando)
             {
                 existeDisco=1;
             }
-            if(stat(direccionTMP, &st)==-1 && existeDisco!=1){ //verificar si el directorio existe
+            printf("disco %d\n",stat(direccionTMP, &st));
+            //if(stat(direccionTMP, &st)==-1 && existeDisco==1){ //verificar si el directorio existe
+            if(fopen(direccionTMP,"r") != NULL && existeDisco==1){
                 existe=1;
             }
            token=strtok(NULL,"/");
